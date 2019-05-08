@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/colorBackground"
+        android:paddingBottom="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:gravity="center"
+            tools:context=".ExpectedParkingsStateActivity">
+
+        <TextView
+                android:text="Wybierz datę i godzinę przybycia"
+                android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textSize="@dimen/standard_text_size"
+                android:layout_marginBottom="@dimen/title_margin"
+                android:layout_height="wrap_content"/>
+
+        <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="wrap_content"
+                android:calendarViewShown="true"
+                android:spinnersShown="false"
+                android:background="@color/white"
+                android:layout_height="wrap_content" />
+
+        <TimePicker
+                android:id="@+id/time_picker"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:background="@color/white"
+                android:layout_height="wrap_content" android:contextClickable="true"/>
+
+        <Button
+                android:id="@+id/date_time_set"
+                android:layout_width="match_parent"
+                android:text="Wyświetl mapę"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"/>
+
+    </LinearLayout>
+</ScrollView>
+
