@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.example.parkingipwr">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -9,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
 
     <application
             android:allowBackup="true"
@@ -18,14 +20,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".StatisticsActivity">
-        </activity>
-        <activity android:name=".ExpectedParkingsStateActivity">
-        </activity>
-        <activity
-                android:name=".CurrentParkingsMapActivity"
-                android:label="@string/title_activity_current_parkings_map">
-        </activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,6 +33,18 @@
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
 
+        <activity
+                android:name=".MapsActivity"
+                android:label="@string/title_activity_maps">
+        </activity>
+        <activity android:name=".StatisticsActivity">
+        </activity>
+        <activity android:name=".ExpectedParkingsStateActivity">
+        </activity>
+        <activity
+                android:name=".CurrentParkingsMapActivity"
+                android:label="@string/title_activity_current_parkings_map">
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

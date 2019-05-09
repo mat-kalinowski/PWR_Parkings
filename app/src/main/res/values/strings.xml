@@ -5,4 +5,5 @@
     <string name="expected_parking_lots_state">Oczekiwany stan parkingów</string>
     <string name="statistics">Dane statystyczne</string>
     <string name="title_activity_current_parkings_map">Map</string>
+    <string name="title_activity_maps">Mapa Parkingów</string>
 </resources>
