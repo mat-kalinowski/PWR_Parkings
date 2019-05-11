@@ -27,7 +27,7 @@ object ParkingiPwrRepository {
         .create()
 
 
-    private val retrofit = Retrofit.Builder()
+    val retrofit = Retrofit.Builder()
         .baseUrl("http://iparking.pwr.edu.pl")
         .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
@@ -50,5 +50,16 @@ object ParkingiPwrRepository {
             }
 
         })
+    }
+
+    fun getParkingPwrWeekStatsSync(parking : Parking): ParkingPwrWeekResponce? {
+        val service = retrofit.create(ParkingPwrService::class.java)  // make it object variable (init function?)
+
+        var responce : ParkingPwrResponce? = null
+
+        val requestBody = "o=get_park&i="+parking.value.toString()
+        val call = service.getWeekStatus(requestBody)
+        val responcee = call.execute().body() // TODO: catch exception. example: no internet connection
+        return responcee
     }
 }
