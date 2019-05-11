@@ -37,15 +37,15 @@
                 android:name=".MapsActivity"
                 android:label="@string/title_activity_maps">
         </activity>
-        <activity android:name=".StatisticsActivity">
+        <activity android:name=".activities.StatisticsActivity">
         </activity>
         <activity android:name=".ExpectedParkingsStateActivity">
         </activity>
         <activity
-                android:name=".CurrentParkingsMapActivity"
+                android:name=".activities.CurrentParkingsMapActivity"
                 android:label="@string/title_activity_current_parkings_map">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
