@@ -9,13 +9,19 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.Marker
+import com.google.maps.android.ui.IconGenerator
+import com.yarolegovich.lovelydialog.LovelyInfoDialog
 
 
+class CurrentParkingsMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
 
-
-class CurrentParkingsMapActivity : AppCompatActivity(), OnMapReadyCallback {
-
+    lateinit var iconFactory : IconGenerator
+    lateinit var mMap: GoogleMap
+    var parkingInfos = ArrayList<ParkingInfo>()
+    var parkingMarkers = ArrayList<Marker>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,18 +30,68 @@ class CurrentParkingsMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
+        iconFactory = IconGenerator(this)
+        iconFactory.setStyle(IconGenerator.STYLE_ORANGE)
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
 
-        val mark = LatLng(51.107064, 17.058980)
+        var mark = LatLng(51.109353,17.058040)
+        mMap = googleMap!!
+        val location = CameraUpdateFactory.newLatLngZoom(mark, 15f)
+        mMap.setOnMarkerClickListener(this)
+        val parkingsArray = ParkingBase.getParkingsArray()
 
-        val yourLocation = CameraUpdateFactory.newLatLngZoom(mark, 18f)
+        for(i in 0 until parkingsArray.size){
+            addMarker(parkingsArray.get(i))
+        }
+        mMap.animateCamera(location)
 
-        googleMap!!.addMarker(
-            MarkerOptions().position(mark)
-                .title("Marker C-13")
-        )
-        googleMap!!.animateCamera(yourLocation)
+
     }
+
+
+   /* fun addMarker(name : String, latLng: LatLng, freePlaces : Int, availablePlaces : Int){
+        val text : String = "$freePlaces/$availablePlaces"
+        val markerOptions =
+            MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).position(latLng)
+                .anchor(iconFactory.anchorU, iconFactory.anchorV)
+
+
+        var m = mMap.addMarker(markerOptions)
+        parkingInfos.add(ParkingInfo(name, latLng,availablePlaces, freePlaces))
+        parkingMarkers.add(m)
+
+    }*/
+
+    fun addMarker(parkingInfo: ParkingInfo){
+        val text : String = "${parkingInfo.freePlaces}/${parkingInfo.availablePlaces}"
+        val markerOptions =
+            MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).position(parkingInfo.latLng)
+                .anchor(iconFactory.anchorU, iconFactory.anchorV)
+
+        var m = mMap.addMarker(markerOptions)
+        parkingInfos.add(parkingInfo)
+        parkingMarkers.add(m)
+    }
+
+    override fun onMarkerClick(clickedMarker: Marker?): Boolean {
+
+        for(i in 0 until parkingMarkers.size){
+            if(clickedMarker!!.equals(parkingMarkers.get(i))){
+                var parking = parkingInfos.get(i)
+
+                LovelyInfoDialog(this)
+                    .setTopColorRes(R.color.colorBackground)
+                    .setIcon(parking.icon)
+                    .setTitle(parking.getNameString())
+                    .setMessage(parking.getDescriptionString())
+                    .show()
+            }
+        }
+        return true
+    }
+
+
+
 }

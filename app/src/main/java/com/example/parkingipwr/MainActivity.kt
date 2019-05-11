@@ -11,8 +11,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
     }
 
 
@@ -21,10 +19,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(myintent)
     }
 
-    fun checkExpectedState(view: View){
-        val myintent = Intent(this, ExpectedParkingsStateActivity::class.java)
-        startActivity(myintent)
-    }
 
     fun displayStatistics(view: View){
         val myintent = Intent(this, StatisticsActivity::class.java)
