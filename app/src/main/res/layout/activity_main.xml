@@ -36,15 +36,6 @@
                 android:layout_marginBottom="@dimen/buttons_margin" android:onClick="displayCurrentState"
                 android:fontFamily="sans-serif-condensed-medium"/>
         <Button
-                android:text="@string/expected_parking_lots_state"
-                android:layout_width="match_parent"
-                android:textScaleX="0.8"
-                android:textSize="@dimen/buttons_text_size"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:layout_height="wrap_content" android:id="@+id/expectedStateButton"
-                android:background="@color/colorText"
-                android:layout_marginBottom="@dimen/buttons_margin" android:onClick="checkExpectedState"/>
-        <Button
                 android:text="@string/statistics"
                 android:layout_width="match_parent"
 
