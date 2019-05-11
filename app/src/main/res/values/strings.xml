@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">parkingiPwr</string>
+    <string name="app_name">ParkingPwr</string>
     <string name="title">ParkingiPwr</string>
     <string name="current_parking_lots_state">Obecny stan parkingów</string>
     <string name="expected_parking_lots_state">Oczekiwany stan parkingów</string>
