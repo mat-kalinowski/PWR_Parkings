@@ -3,11 +3,6 @@ package com.example.parkingipwr.data
 class ParkingThread : Thread(), IParkingResponseObserver {
 
     private var lastStats: MutableList<Place> = mutableListOf()
-    private var running: Boolean = false
-
-    fun setRunning(isRunning: Boolean) {
-        this.running = isRunning
-    }
 
     override fun run() {
 
@@ -17,11 +12,13 @@ class ParkingThread : Thread(), IParkingResponseObserver {
         }
     }
 
+    @Synchronized
     override fun notify(parkings: List<Place>) {
-        val changedParkings = mutableListOf<Place>()
+        var changedParkings = mutableListOf<Place>()
 
         if (parkings.size != lastStats.size) {
             lastStats = parkings.toMutableList()
+            changedParkings = parkings.toMutableList()
         }
 
         else {
@@ -37,5 +34,10 @@ class ParkingThread : Thread(), IParkingResponseObserver {
         if (changedParkings.size != 0) {
             ParkingiPwrRepository.notifyObservers(changedParkings)
         }
+    }
+
+    @Synchronized
+    fun getLastStats(): List<Place>{
+        return this.lastStats.toMutableList()
     }
 }

@@ -8,7 +8,7 @@ data class ParkingWeekResponse(
     var places : Place
 )
 
-data class ParkingPwrResponce(
+data class ParkingPwrResponse(
     var success : Int,
     var places : List<Place>
 )

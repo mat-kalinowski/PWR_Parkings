@@ -6,10 +6,11 @@ import android.widget.Button
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import android.graphics.Color
-import android.os.AsyncTask
 import com.example.parkingipwr.data.Parking
 import com.example.parkingipwr.data.ParkingiPwrRepository
 import com.example.parkingipwr.R
+import com.example.parkingipwr.data.IParkingResponseObserver
+import com.example.parkingipwr.data.Place
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.LineData
 
@@ -27,27 +28,32 @@ class StatisticsActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button).setOnClickListener {
 
-            AsyncTask.execute {
-                val ResponcechartData =
-                    ParkingiPwrRepository.getWeekStatistics(Parking.C13).chart
-                var chart = findViewById<LineChart>(R.id.chart)
-                var entries: MutableList<Entry> = mutableListOf()
+            ParkingiPwrRepository.getWeekStats(Parking.C13, object : IParkingResponseObserver {
 
-                for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
-                    entries.add(Entry(time2float(ResponcechartData.x.get(i)), ResponcechartData.data.get(i).toFloat()))
+                override fun notify(parking: Place) {
+
+                    var chart = findViewById<LineChart>(R.id.chart)
+                    var entries: MutableList<Entry> = mutableListOf()
+                    val ResponcechartData = parking.chart
+
+                    for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
+                        entries.add(
+                            Entry(
+                                time2float(ResponcechartData.x.get(i)),
+                                ResponcechartData.data.get(i).toFloat()
+                            )
+                        )
+                    }
+
+                    val dataSet = LineDataSet(entries, "Label")
+                    dataSet.color = Color.BLACK
+
+                    val lineData = LineData(dataSet)
+                    chart.data = lineData
+                    chart.invalidate() // refresh
                 }
-
-
-                val dataSet = LineDataSet(entries, "Label")
-                dataSet.color = Color.BLACK
-
-                val lineData = LineData(dataSet)
-                chart.data = lineData
-                chart.invalidate() // refresh
-            }
-
-            }
-
+            })
+        }
 
     }
 

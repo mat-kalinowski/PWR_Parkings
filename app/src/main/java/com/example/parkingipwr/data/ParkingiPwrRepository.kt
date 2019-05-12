@@ -14,7 +14,7 @@ import com.google.gson.GsonBuilder
 object ParkingiPwrRepository {
 
     var observers : ArrayList<IParkingChangeObserver> = ArrayList()
-    var mainThread: ParkingThread = ParkingThread()
+    var parkingThread: ParkingThread = ParkingThread()
 
     val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
@@ -37,51 +37,78 @@ object ParkingiPwrRepository {
         .build()
 
     init{
-        mainThread.setRunning(true)
-        mainThread.start()
+        parkingThread.start()
     }
+
+    /*
+        funkcja wykonująca zapytanie do API o dane odnośnie wszystkich parkingów
+
+        observer: obiekt implementujący IParkingResponseObserver, który zostaje powiadomiony o wyniku metodą notify()
+     */
 
     @Synchronized
     fun getCurrentStats(observer: IParkingResponseObserver){
 
         val service = retrofit.create(ParkingPwrService::class.java)  // make it object variable (init function?)
         val call = service.getStatus()
-        call.enqueue( object : Callback<ParkingPwrResponce> {
-            override fun onFailure(call: Call<ParkingPwrResponce>, t: Throwable) {
+        call.enqueue( object : Callback<ParkingPwrResponse> {
+            override fun onFailure(call: Call<ParkingPwrResponse>, t: Throwable) {
                 Log.e("DATA ERROR: ", "something went wrong, idk what \n" + t.message)
             }
 
-            override fun onResponse(call: Call<ParkingPwrResponce>, response: Response<ParkingPwrResponce>) {
+            override fun onResponse(call: Call<ParkingPwrResponse>, response: Response<ParkingPwrResponse>) {
                 val body = response.body()
                 observer.notify(body!!.places)
             }
         })
     }
 
-    @Synchronized
-    fun getWeekStatistics(parking: Parking): Place{
-        val service = retrofit.create(ParkingPwrService::class.java)  // make it object variable (init function?)
-        var place: Place = Place()
+    /*
+        funkcja zwracająca ostatnie dane o parkingach uzyskane z API
+     */
 
-        val a = object: Thread() {
-            override fun run() {
-                val requestBody = "o=get_park&i="+parking.value.toString()
-                val call = service.getWeekStatus(requestBody)
-                val response =  call.execute()
-
-                place = response.body()!!.places
-            }
-        }
-        a.start()
-        a.join()
-
-        return place
+    fun getLastStats() : List<Place>{
+        return parkingThread.getLastStats()
     }
 
+    /*
+        funkcja wykonująca zapytanie do API o tygodniowe dane parkingu
+
+        parking: parking, którego dotyczy zapytanie
+        observer: obiekt implementujący IParkingResponseObserver, który zostaje powiadomiony o wyniku metodą notify()
+     */
+
+    @Synchronized
+    fun getWeekStats(parking: Parking, observer: IParkingResponseObserver){
+        val service = retrofit.create(ParkingPwrService::class.java)  // make it object variable (init function?)
+        val requestBody = "o=get_park&i="+parking.value.toString()
+        val call = service.getWeekStatus(requestBody)
+
+        call.enqueue( object : Callback<ParkingWeekResponse> {
+            override fun onFailure(call: Call<ParkingWeekResponse>, t: Throwable) {
+                Log.e("DATA ERROR: ", "something went wrong, idk what \n" + t.message)
+            }
+
+            override fun onResponse(call: Call<ParkingWeekResponse>, response: Response<ParkingWeekResponse>) {
+                val body = response.body()
+                observer.notify(body!!.places)
+            }
+        })
+    }
+
+    /*
+        funkcja, poprzez którą klasa implementująca IParkingChangeObserve może zapisać się do uzyskiwania powiadomień
+        o zmianach danych w parkingach
+
+        observer: obiekt implementujący IParkingChangeObserver, który zostaje powiadomiony o każdej zmianie metodą notifyChanged()
+     */
+
+    @Synchronized
     fun attachObserver(observer: IParkingChangeObserver){
         this.observers.add(observer)
     }
 
+    @Synchronized
     fun notifyObservers(changedParking: List<Place>){
         for(i in 0 .. (observers.size-1)){
             observers[i].notifyChanged(changedParking)

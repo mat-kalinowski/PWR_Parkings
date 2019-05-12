@@ -16,7 +16,7 @@ interface ParkingPwrService {
         "Content-Type:application/x-www-form-urlencoded"
     )
     @POST("/modules/iparking/scripts/ipk_operations.php")
-    fun getStatus(@Body body : String = "o=get_parks") : Call<ParkingPwrResponce>
+    fun getStatus(@Body body : String = "o=get_parks") : Call<ParkingPwrResponse>
 
 
     @Headers(
