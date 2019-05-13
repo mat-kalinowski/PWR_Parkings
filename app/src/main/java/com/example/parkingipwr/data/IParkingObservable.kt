@@ -19,7 +19,7 @@ interface IParkingResponseObserver {
         parking: dane parkingu, którego dotyczyło zapytanie
      */
 
-    fun notify(parking: Place){}
+    fun notify(places: Place, parking: Parking){}
 }
 
 interface IParkingChangeObserver{

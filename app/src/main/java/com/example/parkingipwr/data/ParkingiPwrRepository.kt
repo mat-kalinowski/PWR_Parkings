@@ -91,9 +91,13 @@ object ParkingiPwrRepository {
 
             override fun onResponse(call: Call<ParkingWeekResponse>, response: Response<ParkingWeekResponse>) {
                 val body = response.body()
-                observer.notify(body!!.places)
+                observer.notify(body!!.places, parking)
             }
         })
+    }
+
+    fun getLastWeekStats(parking : Parking) : Place? {
+        return parkingThread.getLastWeekStats(parking)
     }
 
     /*

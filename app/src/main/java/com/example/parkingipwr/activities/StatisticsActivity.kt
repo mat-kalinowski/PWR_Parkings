@@ -26,35 +26,38 @@ class StatisticsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
 
-        findViewById<Button>(R.id.button).setOnClickListener {
-
+        var lastStats = ParkingiPwrRepository.getLastWeekStats(Parking.C13) // check if we have stored values
+        if(lastStats != null)
+            updateChart(lastStats)
+        else
             ParkingiPwrRepository.getWeekStats(Parking.C13, object : IParkingResponseObserver {
-
-                override fun notify(parking: Place) {
-
-                    var chart = findViewById<LineChart>(R.id.chart)
-                    var entries: MutableList<Entry> = mutableListOf()
-                    val ResponcechartData = parking.chart
-
-                    for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
-                        entries.add(
-                            Entry(
-                                time2float(ResponcechartData.x.get(i)),
-                                ResponcechartData.data.get(i).toFloat()
-                            )
-                        )
-                    }
-
-                    val dataSet = LineDataSet(entries, "Label")
-                    dataSet.color = Color.BLACK
-
-                    val lineData = LineData(dataSet)
-                    chart.data = lineData
-                    chart.invalidate() // refresh
+                override fun notify(places: Place, parking: Parking) {
+                    updateChart(places)
                 }
             })
+    }
+
+    private fun updateChart(parking: Place){
+
+        var chart = findViewById<LineChart>(R.id.chart)
+        var entries: MutableList<Entry> = mutableListOf()
+        val ResponcechartData = parking.chart
+
+        for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
+            entries.add(
+                Entry(
+                    time2float(ResponcechartData.x.get(i)),
+                    ResponcechartData.data.get(i).toFloat()
+                )
+            )
         }
 
+        val dataSet = LineDataSet(entries, "Label")
+        dataSet.color = Color.BLACK
+
+        val lineData = LineData(dataSet)
+        chart.data = lineData
+        chart.invalidate() // refresh
     }
 
 

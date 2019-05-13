@@ -3,11 +3,16 @@ package com.example.parkingipwr.data
 class ParkingThread : Thread(), IParkingResponseObserver {
 
     private var lastStats: MutableList<Place> = mutableListOf()
+    private var lastWeekStats = mutableMapOf<Parking, Place>()
 
     override fun run() {
-
+        // evaluate only once
+        enumValues<Parking>().forEach {
+            ParkingiPwrRepository.getWeekStats(it, this)
+        }
         while (true) {
             ParkingiPwrRepository.getCurrentStats(this)
+
             Thread.sleep(20000)
         }
     }
@@ -36,8 +41,20 @@ class ParkingThread : Thread(), IParkingResponseObserver {
         }
     }
 
+    override fun notify(places: Place, parking: Parking) {
+        lastWeekStats[parking] = places
+    }
+
+
+
+
     @Synchronized
     fun getLastStats(): List<Place>{
         return this.lastStats.toMutableList()
+    }
+
+    @Synchronized
+    fun getLastWeekStats(parking: Parking): Place?{
+        return this.lastWeekStats[parking]
     }
 }
