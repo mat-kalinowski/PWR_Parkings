@@ -31,4 +31,14 @@
               map:layout_constraintStart_toStartOf="parent"
               map:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+            android:text=" "
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:id="@+id/textViewAlert" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
 </android.support.constraint.ConstraintLayout>
