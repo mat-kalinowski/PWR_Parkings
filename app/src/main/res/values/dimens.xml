@@ -6,4 +6,5 @@
     <dimen name="buttons_layout_margin">40dp</dimen>
     <dimen name="buttons_margin">20dp</dimen>
     <dimen name="buttons_text_size">18dp</dimen>
+    <dimen name="map_marker_text_size">18dp</dimen>
 </resources>
