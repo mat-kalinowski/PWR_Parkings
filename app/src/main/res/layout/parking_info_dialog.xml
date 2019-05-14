@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:orientation="vertical"
+                                             android:layout_width="wrap_content"
+                                             android:layout_height="wrap_content"
+                                             android:padding="10dp"
+                                             android:background="@drawable/dialog_background">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:weightSum="5"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            android:id="@+id/linearLayout">
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewTitle" android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp" android:textColor="@color/colorText" android:textSize="24sp"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/caricon"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:id="@+id/imageView"
+        android:layout_marginRight="10dp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDescription" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/colorAccent" android:textSize="18sp" android:layout_marginTop="8dp"/>
+
+</LinearLayout>

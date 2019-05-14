@@ -26,4 +26,16 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun displayCurrentState(){
+        val myintent = Intent(this, CurrentParkingsMapActivity::class.java)
+        startActivity(myintent)
+    }
+
+
+    fun displayStatistics(){
+        val myintent = Intent(this, StatisticsActivity::class.java)
+        startActivity(myintent)
+    }
+
+
 }
