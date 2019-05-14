@@ -6,58 +6,50 @@ import android.widget.Button
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import android.graphics.Color
-import com.example.parkingipwr.data.Parking
-import com.example.parkingipwr.data.ParkingiPwrRepository
+import android.widget.ListView
 import com.example.parkingipwr.R
-import com.example.parkingipwr.data.IParkingResponseObserver
-import com.example.parkingipwr.data.Place
+import com.example.parkingipwr.adapters.StatisticsAdapter
+import com.example.parkingipwr.adapters.StatisticsObject
+import com.example.parkingipwr.data.*
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.LineData
 
 
 class StatisticsActivity : AppCompatActivity() {
 
-    private fun time2float(date : String) : Float {
-        var split = date.split(":")
-        return split[0].toFloat() + split[1].toFloat()/100
+    private var placesList : MutableList<StatisticsObject> = mutableListOf()
+
+    private fun parkingName(parking: Parking):String{
+        when (parking){
+            Parking.C13 -> return "C-13"
+            Parking.D20 -> return "D-20"
+            Parking.WRO -> return "WRO"
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_statistics)
 
-        var lastStats = ParkingiPwrRepository.getLastWeekStats(Parking.C13) // check if we have stored values
-        if(lastStats != null)
-            updateChart(lastStats)
-        else
-            ParkingiPwrRepository.getWeekStats(Parking.C13, object : IParkingResponseObserver {
-                override fun notify(places: Place, parking: Parking) {
-                    updateChart(places)
-                }
-            })
+        enumValues<Parking>().forEach {
+            var lastStats = ParkingiPwrRepository.getLastWeekStats(it) // check if we have stored values
+            if(lastStats != null)
+                updateChart(lastStats, parkingName(it))
+            else
+                ParkingiPwrRepository.getWeekStats(it, object : IParkingResponseObserver {
+                    override fun notify(places: Place, parking: Parking) {
+                        updateChart(places, parkingName(it))
+                    }
+                })
+        }
     }
 
-    private fun updateChart(parking: Place){
+    private fun updateChart(parking: Place, parkingName : String){
+        placesList.add(StatisticsObject(parkingName, parking.chart))
 
-        var chart = findViewById<LineChart>(R.id.chart)
-        var entries: MutableList<Entry> = mutableListOf()
-        val ResponcechartData = parking.chart
+        val adapter = StatisticsAdapter(this, placesList)
+        findViewById<ListView>(R.id.stats_list_view).adapter = adapter
 
-        for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
-            entries.add(
-                Entry(
-                    time2float(ResponcechartData.x.get(i)),
-                    ResponcechartData.data.get(i).toFloat()
-                )
-            )
-        }
-
-        val dataSet = LineDataSet(entries, "Label")
-        dataSet.color = Color.BLACK
-
-        val lineData = LineData(dataSet)
-        chart.data = lineData
-        chart.invalidate() // refresh
     }
 
 

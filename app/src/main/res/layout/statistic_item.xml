@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="200dp"
+              android:padding="6dip"
+              android:orientation="horizontal" android:gravity="center_vertical">
+
+    <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
+
+        <TextView
+                android:id="@+id/thirdLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:text="Description"
+                android:layout_alignParentBottom="true"
+                android:textSize="12sp" android:singleLine="true"/>
+
+        <TextView
+                android:id="@+id/secondLine"
+                android:layout_width="wrap_content"
+                android:layout_height="26dip"
+
+                android:ellipsize="marquee"
+                android:layout_above="@id/thirdLine"
+                android:text="Ostatnie miejsce"
+                android:textSize="12sp" android:singleLine="true"/>
+        <TextView
+                android:id="@+id/firstLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_above="@id/secondLine"
+                android:gravity="center_vertical"
+                android:text="Example application"
+                android:textSize="24sp"/>
+
+    </RelativeLayout>
+
+
+    <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="6dip" android:layout_weight="2">
+
+    </com.github.mikephil.charting.charts.BarChart>
+
+</LinearLayout>
+
