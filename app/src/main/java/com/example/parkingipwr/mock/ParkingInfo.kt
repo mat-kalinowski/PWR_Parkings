@@ -1,5 +1,6 @@
-package com.example.parkingipwr
+package com.example.parkingipwr.mock
 
+import com.example.parkingipwr.R
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
