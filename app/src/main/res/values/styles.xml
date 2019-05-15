@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MapMarkerText" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/map_marker_text_size</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+    </style>
+
 </resources>

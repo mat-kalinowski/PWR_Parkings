@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ParkingPwr</string>
+    <string name="title">ParkingiPwr</string>
+    <string name="current_parking_lots_state">Obecny stan parkingów</string>
+    <string name="expected_parking_lots_state">Oczekiwany stan parkingów</string>
+    <string name="statistics">Dane statystyczne</string>
+    <string name="title_activity_current_parkings_map">Map</string>
+    <string name="title_activity_maps">Mapa Parkingów</string>
+    <string name="no_internet_connection_alert">Brak połączenia z internetem.</string>
+    <string name="free_places">Wolne miejsca</string>
+    <string name="available_places">Dostępne miejsca</string>
+
 </resources>
