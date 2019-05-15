@@ -1,6 +1,8 @@
 package com.example.parkingipwr.mock
 
+import android.content.Context
 import com.example.parkingipwr.data.Parking
+import com.example.parkingipwr.data.SharedPrefs
 import com.google.android.gms.maps.model.LatLng
 
 object ParkingBase{
@@ -34,6 +36,13 @@ object ParkingBase{
     }
 
 
+    fun loadSavedDataIfEmpty(context: Context){
+        if(freePalcesSum() == 0){
+            SharedPrefs.loadSavedParkingState(context)
+        }
+    }
+
+
     fun getParkingsArray() : ArrayList<ParkingInfo>{
         return base
     }
@@ -44,5 +53,20 @@ object ParkingBase{
                 return i
         }
         return null
+    }
+
+    fun updateFreePlacesCountForId(id : Int, count : Int){
+        for(i in base){
+            if(i.id == id)
+                i.freePlaces = count
+        }
+    }
+
+    fun freePalcesSum() :Int{
+        var sum = 0
+        for(p in base){
+            sum += p.freePlaces
+        }
+        return sum
     }
 }

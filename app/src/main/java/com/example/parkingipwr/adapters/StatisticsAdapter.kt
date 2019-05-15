@@ -13,6 +13,7 @@ import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.utils.ColorTemplate
 import org.w3c.dom.Text
 
 class StatisticsAdapter(private val context: Context, private val data : MutableList<StatisticsObject>) : BaseAdapter(){
@@ -51,6 +52,9 @@ class StatisticsAdapter(private val context: Context, private val data : Mutable
 
         val dataSet = BarDataSet(entries, "")
         dataSet.color = R.color.colorText
+        dataSet.valueTextColor = R.color.colorText
+
+        //dataSet.setColors(ColorTemplate.COLORFUL_COLORS)
         dataSet.isHighlightEnabled = false
 
         val lineData = BarData(dataSet)
@@ -59,6 +63,9 @@ class StatisticsAdapter(private val context: Context, private val data : Mutable
         chartObj.data = lineData
         chartObj.invalidate()
         chartObj.description.text = "ilość miejsc"
+
+        chartObj.description.textColor = context.resources.getColor(R.color.colorText)
+        chartObj.setBackgroundColor(context.resources.getColor(R.color.colorBackground))
 
         statisticItem.findViewById<TextView>(R.id.thirdLine).text = lastFreeSlot
 

@@ -13,6 +13,7 @@ import com.example.parkingipwr.adapters.StatisticsObject
 import com.example.parkingipwr.data.*
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.LineData
+import kotlinx.android.synthetic.main.activity_statistics.*
 
 
 class StatisticsActivity : AppCompatActivity() {
@@ -48,8 +49,7 @@ class StatisticsActivity : AppCompatActivity() {
         placesList.add(StatisticsObject(parkingName, parking.chart))
 
         val adapter = StatisticsAdapter(this, placesList)
-        findViewById<ListView>(R.id.stats_list_view).adapter = adapter
-
+        stats_list_view.adapter = adapter
     }
 
 

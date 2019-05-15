@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
                 }
             }
         }
+        SharedPrefs.saveParkingPlacesState(this)
     }
 
 
