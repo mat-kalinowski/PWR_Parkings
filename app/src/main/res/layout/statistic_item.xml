@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_margin="10dp"
+              android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="fill_parent"
+                  android:orientation="horizontal"
+                  android:weightSum="7"
+                  android:layout_height="250dp">
+
+        <TextView
+                android:id="@+id/firstLine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:rotation="-90"
+                android:textStyle="bold"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_above="@id/secondLine"
+                android:layout_weight="2"
+                android:text="WRO"
+                android:singleLine="true"
+                android:textSize="40sp"
+                android:layout_marginTop="20dp"
+        android:paddingRight="-10dp"
+        android:layout_marginRight="-40dp"
+        android:layout_marginLeft="-30dp"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/chart"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:background="@color/colorText"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp">
+
+        </com.github.mikephil.charting.charts.BarChart>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content"
+                  android:gravity="right"
+                  android:layout_marginBottom="20dp"
+                  android:layout_marginRight="10dp"
+                  android:paddingRight="10dp"
+                  android:layout_marginTop="5dp">
+
+        <TextView
+                android:id="@+id/secondLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:ellipsize="marquee"
+                android:text="Miejsca kończą się o "
+                android:textSize="12sp"/>
+
+        <TextView
+                android:id="@+id/thirdLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:text="Description"
+                android:textColor="@color/colorText"
+                android:textSize="12sp" android:singleLine="true"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/barChartColor2"/>
+
+</LinearLayout>

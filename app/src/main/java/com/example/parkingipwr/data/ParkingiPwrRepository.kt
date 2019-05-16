@@ -1,5 +1,6 @@
 package com.example.parkingipwr.data
 
+import android.content.SharedPreferences
 import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,7 +37,10 @@ object ParkingiPwrRepository {
         .client(client) // add to see http request log
         .build()
 
-    init{
+    fun setUp(sp: SharedPreferences){
+        Log.e("starting ", " Parkingi Pwr Repository")
+
+        parkingThread.loadFromSP(sp)
         parkingThread.start()
     }
 
