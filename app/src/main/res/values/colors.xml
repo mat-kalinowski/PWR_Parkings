@@ -4,10 +4,11 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#FF9800</color>
     <color name="colorBackground">#D3080809</color>
-    <color name="colorBackground2">#131842</color>
     <color name="colorCalendarBackground">#B2131842</color>
     <color name="colorText">#FF9800</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
+    <color name="barChartColor1">#59039BE5</color>
+    <color name="barChartColor2">#039BE5</color>
+    <color name="barChartColor3">#056DA0</color>
 
 </resources>
