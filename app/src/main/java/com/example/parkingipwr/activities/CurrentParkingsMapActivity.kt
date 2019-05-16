@@ -62,6 +62,8 @@ class CurrentParkingsMapActivity :  AppCompatActivity(), OnMapReadyCallback,
             }
         })
 
+        ParkingBase.loadSavedDataIfEmpty(this)
+
         for(i in 0 until ParkingBase.getParkingsArray().size){
             var p = ParkingBase.getParkingsArray()[i]
             parkingPlaces.add(Place(0, p.id, Date(), p.freePlaces, 0, Chart()))
