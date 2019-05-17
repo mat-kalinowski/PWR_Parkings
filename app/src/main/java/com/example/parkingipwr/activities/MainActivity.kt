@@ -17,6 +17,7 @@ import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Color
 import com.example.parkingipwr.connection.ConnectivityReceiver
+import com.example.parkingipwr.connection.NetworkStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
         super.onResume()
 
         ConnectivityReceiver.connectivityReceiverListener = this
+        showMessage(NetworkStatus.connected)
     }
 
     override fun notifyChanged(changedParkings: List<Place>){
@@ -78,10 +80,13 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
-        showMessage(isConnected)
+        NetworkStatus.connected = isConnected
+        showMessage(NetworkStatus.connected)
     }
 
     fun showMessage(isConnected: Boolean){
+
+        Log.d("network1", isConnected.toString())
         if(!isConnected){
             textViewAlert.setText(R.string.no_internet_connection_alert)
             textViewAlert.setBackgroundColor(Color.RED)

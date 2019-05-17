@@ -28,3 +28,7 @@ class ConnectivityReceiver : BroadcastReceiver() {
         var connectivityReceiverListener: ConnectivityReceiverListener? = null
     }
 }
+
+object NetworkStatus{
+    var connected = true
+}

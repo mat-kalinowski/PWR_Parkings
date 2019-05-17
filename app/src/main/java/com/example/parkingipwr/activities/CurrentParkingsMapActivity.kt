@@ -16,6 +16,7 @@ import com.example.parkingipwr.mock.ParkingBase
 import com.example.parkingipwr.mock.ParkingInfo
 import com.example.parkingipwr.R
 import com.example.parkingipwr.connection.ConnectivityReceiver
+import com.example.parkingipwr.connection.NetworkStatus
 import com.example.parkingipwr.data.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -73,6 +74,7 @@ class CurrentParkingsMapActivity :  AppCompatActivity(), OnMapReadyCallback,
     override fun onResume() {
         super.onResume()
         ConnectivityReceiver.connectivityReceiverListener = this
+        showMessage(NetworkStatus.connected)
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -143,10 +145,12 @@ class CurrentParkingsMapActivity :  AppCompatActivity(), OnMapReadyCallback,
     }
 
     override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        NetworkStatus.connected = isConnected
         showMessage(isConnected)
     }
 
     fun showMessage(isConnected: Boolean){
+        Log.d("network2", isConnected.toString())
         if(!isConnected){
             textViewAlert.setText(R.string.no_internet_connection_alert)
             textViewAlert.setBackgroundColor(Color.RED)
