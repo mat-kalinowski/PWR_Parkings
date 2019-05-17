@@ -1,31 +1,26 @@
 package com.example.parkingipwr.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.parkingipwr.R
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.utils.ColorTemplate
-import org.w3c.dom.Text
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 
 
 
 
+@Suppress("DEPRECATION")
 class StatisticsAdapter(private val context: Context, private val data : MutableList<StatisticsObject>) : BaseAdapter(){
 
     private fun time2float(date : String) : Float {
-        var split = date.split(":")
+        val split = date.split(":")
         return split[0].toFloat() + split[1].toFloat()/100
     }
 
@@ -33,25 +28,26 @@ class StatisticsAdapter(private val context: Context, private val data : Mutable
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var lastFreeSlot = ""
-        var statisticItem = inflater.inflate(R.layout.statistic_item, parent, false)
+        val statisticItem = inflater.inflate(R.layout.statistic_item, parent, false)
 
         statisticItem.findViewById<TextView>(R.id.firstLine).text = (getItem(position) as StatisticsObject).parkingName
 
-        var entries: MutableList<BarEntry> = mutableListOf()
-        val ResponcechartData = (getItem(position) as StatisticsObject).chart
+        val entries: MutableList<BarEntry> = mutableListOf()
+        val responcechartData = (getItem(position) as StatisticsObject).chart
 
-        for (i in 1 until ResponcechartData.data.size) { // start from 1 due to specific api responce -_-
-            if(ResponcechartData.data.get(i) == "0" && lastFreeSlot == ""){
-                var split = ResponcechartData.x.get(i).split(":")
+        for (i in 1 until responcechartData.data.size) { // start from 1 due to specific api responce -_-
+            if(responcechartData.data[i] == "0" && lastFreeSlot == ""){
+                val split = responcechartData.x[i].split(":")
                 lastFreeSlot = split[0] + ":" + split[1]
             }
 
             entries.add(
                 BarEntry(
-                    time2float(ResponcechartData.x.get(i)),
-                    ResponcechartData.data.get(i).toFloat()
+                    time2float(responcechartData.x[i]),
+                    responcechartData.data[i].toFloat()
                 )
             )
         }
@@ -64,7 +60,7 @@ class StatisticsAdapter(private val context: Context, private val data : Mutable
         dataSet.isHighlightEnabled = false
 
         val lineData = BarData(dataSet)
-        var colorTemplate: IntArray = IntArray(3)
+        val colorTemplate= IntArray(3)
         colorTemplate[0] = R.color.barChartColor1
         colorTemplate[1] = R.color.barChartColor2
         colorTemplate[2] = R.color.barChartColor3

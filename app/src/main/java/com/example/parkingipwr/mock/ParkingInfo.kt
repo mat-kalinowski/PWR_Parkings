@@ -8,13 +8,12 @@ class ParkingInfo(val id: Int, val name : String, val latLng: LatLng, val availa
 
     var freePlaces = 0
 
-
     fun getNameString(): String{
         return "Parking $name"
     }
 
     fun getDescriptionString() : String{
-        return "Free places: $freePlaces \nAvailable places: $availablePlaces \n "
+        return "Wolne miejsca: $freePlaces \nDostępne miejsca: $availablePlaces \n "
     }
 
 }

@@ -8,12 +8,7 @@ import android.view.View
 import com.example.parkingipwr.R
 import com.example.parkingipwr.data.*
 import com.example.parkingipwr.mock.ParkingBase
-import android.widget.Toast
-import android.net.NetworkInfo
-import android.content.Context.CONNECTIVITY_SERVICE
-import android.support.v4.content.ContextCompat.getSystemService
 import android.net.ConnectivityManager
-import android.content.Context
 import android.content.IntentFilter
 import android.graphics.Color
 import com.example.parkingipwr.connection.ConnectivityReceiver
@@ -21,10 +16,9 @@ import com.example.parkingipwr.connection.NetworkStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityReceiver.ConnectivityReceiverListener {
 
-
-    private var parkingPlaces = listOf<Place>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,9 +47,8 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
     }
 
     override fun notifyChanged(changedParkings: List<Place>){
-        Log.e("NOTIFYMAIN: ", changedParkings.size.toString())
 
-        var baseArray = ParkingBase.getParkingsArray()
+        val baseArray = ParkingBase.getParkingsArray()
         for(p1 in changedParkings){
             for(p2 in baseArray){
                 if(p1.parking_id == p2.id){
@@ -84,15 +77,14 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
         showMessage(NetworkStatus.connected)
     }
 
-    fun showMessage(isConnected: Boolean){
+    private fun showMessage(isConnected: Boolean){
 
-        Log.d("network1", isConnected.toString())
         if(!isConnected){
             textViewAlert.setText(R.string.no_internet_connection_alert)
             textViewAlert.setBackgroundColor(Color.RED)
             textViewAlert.visibility = View.VISIBLE
         }else{
-            textViewAlert.setText(" ")
+            textViewAlert.text = " "
             textViewAlert.setBackgroundColor(resources.getColor(R.color.colorBackground))
             textViewAlert.visibility = View.GONE
         }

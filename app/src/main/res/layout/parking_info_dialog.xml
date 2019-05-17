@@ -1,47 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             android:orientation="vertical"
-                                             android:layout_width="wrap_content"
-                                             android:layout_height="wrap_content"
-                                             android:padding="10dp"
-                                             android:background="@drawable/dialog_background">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="right"
+              android:background="@drawable/dialog_background" android:paddingRight="15dp" android:paddingTop="15dp"
+              android:paddingBottom="15dp" android:paddingLeft="10dp">
+
+
     <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:weightSum="5"
-            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-            android:id="@+id/linearLayout">
+            android:layout_marginStart="0dp" android:layout_marginTop="0dp"
+            android:id="@+id/linearLayout" android:paddingLeft="10dp">
+
 
         <TextView
-                android:text="TextView"
+                android:text="Parking WRO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewTitle" android:layout_marginTop="8dp"
-                android:layout_marginBottom="5dp"
+                android:id="@+id/textViewTitle" android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp" android:textColor="@color/colorText" android:textSize="24sp"/>
-
-        <ImageView
+                android:layout_marginStart="0dp" android:textColor="@color/colorText" android:textSize="30sp"/>
+        <TextView
+                android:text="Wolne miejsca: 12"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/caricon"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="4"
-                android:id="@+id/imageView"
-        android:layout_marginRight="10dp"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewDescription" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="0dp"
+                android:textColor="@color/colorAccent" android:textSize="18sp" android:layout_marginTop="0dp"
+                android:paddingTop="10dp"/>
 
 
     </LinearLayout>
 
-    <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewDescription" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/colorAccent" android:textSize="18sp" android:layout_marginTop="8dp"/>
+    <ImageView
+            android:layout_width="53dp"
+            android:layout_height="54dp" app:srcCompat="@drawable/parkingicon"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="4"
+            android:id="@+id/imageView"
+            android:layout_marginRight="0dp"/>
+
 
 </LinearLayout>

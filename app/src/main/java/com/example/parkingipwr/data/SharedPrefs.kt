@@ -11,45 +11,29 @@ object SharedPrefs{
     private const val SAVED_PARKING_STATE = "saved_parking_state"
 
 
-    fun saveParkingPlacesState(places : List<Place>, context: Context){
-
-        var s = ""
-        for(p in places){
-            s += p.parking_id.toString() + "," + p.liczba_miejsc + ";"
-        }
-
-        val sharedPref : SharedPreferences = context.getSharedPreferences( PREFS_NAME, Context.MODE_PRIVATE)
-        val editor : SharedPreferences.Editor = sharedPref.edit()
-        editor.putString(SAVED_PARKING_STATE, s)
-        editor!!.commit()
-    }
-
     fun saveParkingPlacesState(context: Context){
 
-        var parkingInfos = ParkingBase.getParkingsArray()
-
+        val parkingInfos = ParkingBase.getParkingsArray()
         var s = ""
         for(p in parkingInfos){
             s += p.id.toString() + "," + p.freePlaces + ";"
         }
-
-        Log.d("SPString" , s)
         val sharedPref : SharedPreferences = context.getSharedPreferences( PREFS_NAME, Context.MODE_PRIVATE)
         val editor : SharedPreferences.Editor = sharedPref.edit()
         editor.putString(SAVED_PARKING_STATE, s)
         editor!!.commit()
     }
 
-    fun getSavedParkingsStateString(context: Context) : String{
+    private fun getSavedParkingsStateString(context: Context) : String{
         val sharedPref : SharedPreferences = context.getSharedPreferences( PREFS_NAME, Context.MODE_PRIVATE)
         return sharedPref.getString(SAVED_PARKING_STATE, "")
     }
 
     fun loadSavedParkingState(context: Context){
-        var array = getSavedParkingsStateString(context).split(";").toTypedArray()
+        val array = getSavedParkingsStateString(context).split(";").toTypedArray()
         for(i in array){
             try{
-                var array2 = i.split(",").toTypedArray()
+                val array2 = i.split(",").toTypedArray()
                 ParkingBase.updateFreePlacesCountForId(array2[0].toInt(), array2[1].toInt())
             }catch (e : Exception){
                 Log.e("EXC" , e.toString())
