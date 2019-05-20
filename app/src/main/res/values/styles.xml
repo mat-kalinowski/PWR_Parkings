@@ -14,4 +14,17 @@
         <item name="android:fontFamily">sans-serif-condensed-medium</item>
     </style>
 
+    <style name="MenuButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorText</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textScaleX">0.8</item>
+        <item name="android:textSize">@dimen/buttons_text_size</item>
+        <item name="android:layout_marginBottom">@dimen/buttons_margin</item>
+        <item name="android:onClick">displayStatistics</item>
+    </style>
+
+
+
 </resources>

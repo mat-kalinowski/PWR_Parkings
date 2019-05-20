@@ -26,17 +26,9 @@ class MainActivity : AppCompatActivity(), IParkingChangeObserver, ConnectivityRe
 
         ParkingiPwrRepository.attachObserver(this)
 
-        ParkingiPwrRepository.getCurrentStats(object : IParkingResponseObserver{
-            override fun notify(parkings: List<Place>){
-                Log.e("hey", parkings.size.toString())
-            }
-        })
-
         registerReceiver(ConnectivityReceiver(),
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         )
-
-        //ParkingiPwrRepository.getLastStats()
     }
 
     override fun onResume() {

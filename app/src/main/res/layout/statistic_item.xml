@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_margin="10dp"
+              android:layout_margin="@dimen/stat_horizontal_margin"
               android:layout_height="wrap_content">
 
     <LinearLayout android:layout_width="fill_parent"
@@ -20,13 +20,13 @@
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_above="@id/secondLine"
                 android:layout_weight="2"
-                android:text="WRO"
+                android:text="@string/statistics_parking_title"
+                android:textSize="@dimen/stat_title_text_size"
                 android:singleLine="true"
-                android:textSize="40sp"
                 android:layout_marginTop="20dp"
-        android:paddingRight="-10dp"
-        android:layout_marginRight="-40dp"
-        android:layout_marginLeft="-30dp"/>
+                android:paddingRight="-10dp"
+                android:layout_marginRight="-40dp"
+                android:layout_marginLeft="-30dp"/>
 
         <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart"
@@ -35,10 +35,9 @@
                 android:background="@color/colorText"
                 android:layout_marginRight="20dp"
                 android:layout_weight="5"
-                android:layout_marginBottom="0dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginBottom="0dp" android:layout_marginLeft="0dp"
+                android:layout_marginEnd="@dimen/stat_horizontal_margin"
+                android:layout_marginStart="@dimen/stat_horizontal_margin"
                 android:layout_marginTop="20dp">
 
         </com.github.mikephil.charting.charts.BarChart>
@@ -50,8 +49,8 @@
                   android:layout_height="wrap_content"
                   android:gravity="right"
                   android:layout_marginBottom="20dp"
-                  android:layout_marginRight="10dp"
-                  android:paddingRight="10dp"
+                  android:layout_marginRight="@dimen/stat_horizontal_margin"
+                  android:paddingRight="@dimen/normal_padding"
                   android:layout_marginTop="5dp">
 
         <TextView
@@ -60,18 +59,18 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorText"
                 android:ellipsize="marquee"
-                android:text="Miejsca kończą się o "
-                android:textSize="12sp"/>
+                android:text="@string/statistics_places"
+                android:textSize="@dimen/stat_description_text"/>
 
         <TextView
                 android:id="@+id/thirdLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
-                android:text="Description"
+                android:text="@string/statistics_description"
                 android:textColor="@color/colorText"
-                android:textSize="12sp" android:singleLine="true"/>
-
+                android:textSize="@dimen/stat_description_text"
+                android:singleLine="true"/>
     </LinearLayout>
 
     <View

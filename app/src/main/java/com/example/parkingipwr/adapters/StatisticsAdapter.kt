@@ -53,7 +53,6 @@ class StatisticsAdapter(private val context: Context, private val data : Mutable
         }
 
 
-
         val dataSet = BarDataSet(entries, "")
         dataSet.color = R.color.colorText
         dataSet.valueTextColor = R.color.colorBackground

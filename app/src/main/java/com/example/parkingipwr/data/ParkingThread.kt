@@ -81,13 +81,15 @@ class ParkingThread : Thread(), IParkingResponseObserver {
         val spDate = sp.getLong("WEEK_DATE", 0)
         val diff = Date().time - spDate
 
-        if(TimeUnit.MILLISECONDS.toDays(diff) < 7){
+        if(TimeUnit.MILLISECONDS.toHours(diff) < 24){
             loadedFromSP = true
 
-            val json = sp.getString("WEEK_DATA","")
-            val mapType = object : TypeToken<MutableMap<Parking,Place>>() { }.type
+            if(sp.contains("WEEK_DATA")) {
+                val json = sp.getString("WEEK_DATA", " ")
+                val mapType = object : TypeToken<MutableMap<Parking, Place>>() {}.type
 
-            lastWeekStats = gson.fromJson(json, mapType)
+                lastWeekStats = gson.fromJson(json, mapType)
+            }
         }
     }
 
