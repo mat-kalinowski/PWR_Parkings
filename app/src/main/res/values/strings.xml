@@ -9,10 +9,11 @@
     <string name="no_internet_connection_alert">Brak połączenia z internetem.</string>
     <string name="free_places">Wolne miejsca</string>
     <string name="available_places">Dostępne miejsca</string>
+
     <string name="statistics_places">Miejsca kończą się o </string>
     <string name="statistics_description">Description</string>
     <string name="statistics_parking_title">WRO</string>
+
     <string name="dialog_title">Parking WRO</string>
     <string name="dialog_description">Wolne miejsca: 12</string>
-
 </resources>

@@ -33,8 +33,6 @@
                 android:id="@+id/textViewDescription" app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorAccent" android:textSize="18sp"
                 android:paddingTop="@dimen/small_padding"/>
-
-
     </LinearLayout>
 
     <ImageView

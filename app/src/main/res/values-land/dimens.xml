@@ -3,6 +3,7 @@
     <dimen name="main_header_width">596dp</dimen>
     <dimen name="main_header_height">76dp</dimen>
     <dimen name="main_top_margin">20dp</dimen>
+
     <dimen name="cparking_header_width">500dp</dimen>
     <dimen name="cparking_header_height">69dp</dimen>
 </resources>

@@ -23,7 +23,7 @@
                 android:text="@string/statistics_parking_title"
                 android:textSize="@dimen/stat_title_text_size"
                 android:singleLine="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/stat_vertical_margin"
                 android:paddingRight="-10dp"
                 android:layout_marginRight="-40dp"
                 android:layout_marginLeft="-30dp"/>
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="0dp" android:layout_marginLeft="0dp"
                 android:layout_marginEnd="@dimen/stat_horizontal_margin"
                 android:layout_marginStart="@dimen/stat_horizontal_margin"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/stat_vertical_margin">
 
         </com.github.mikephil.charting.charts.BarChart>
 
@@ -48,28 +48,20 @@
                   android:orientation="horizontal"
                   android:layout_height="wrap_content"
                   android:gravity="right"
-                  android:layout_marginBottom="20dp"
+                  android:layout_marginBottom="@dimen/stat_vertical_margin"
                   android:layout_marginRight="@dimen/stat_horizontal_margin"
                   android:paddingRight="@dimen/normal_padding"
                   android:layout_marginTop="5dp">
 
         <TextView
                 android:id="@+id/secondLine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorText"
-                android:ellipsize="marquee"
-                android:text="@string/statistics_places"
-                android:textSize="@dimen/stat_description_text"/>
+                style="@style/StatItemTextBox"
+                android:text="@string/statistics_places"/>
 
         <TextView
                 android:id="@+id/thirdLine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
+                style="@style/StatItemTextBox"
                 android:text="@string/statistics_description"
-                android:textColor="@color/colorText"
-                android:textSize="@dimen/stat_description_text"
                 android:singleLine="true"/>
     </LinearLayout>
 
